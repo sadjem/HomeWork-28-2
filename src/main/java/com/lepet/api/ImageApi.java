@@ -14,7 +14,7 @@ public class ImageApi {
     ImageDao imageDao = new ImageDao();
 
     @POST
-    @Path("/addImage")
+    @Path("/add")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response addImage(@FormParam("imageInBase64") String imageInBase64,
                              @FormParam("aboutImage") String aboutImage){
@@ -24,9 +24,9 @@ public class ImageApi {
                 .entity("Image add with id: " + imageDao.addImage(image))
                 .build();
     }
-    @Path("/getImages")
+
     @GET
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getImages (){
         return Response
                 .status(Response.Status.OK)

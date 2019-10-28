@@ -7,10 +7,12 @@ import javax.persistence.*;
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Expose
     private int id;
 
     @Column
     private String imageInBase64;
+    @Expose
     private String aboutImage;
 
     public Image() {
@@ -47,10 +49,10 @@ public class Image {
 
     @Override
     public String toString() {
-        return "Image{" +
-                "id=" + id +
-                ", imageInBase64='" + imageInBase64 + '\'' +
-                ", aboutImage='" + aboutImage + '\'' +
-                '}';
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .excludeFieldsWithoutExposeAnnotation()
+                .create();
+        return gson.toJson(this);
     }
 }
